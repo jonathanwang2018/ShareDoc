@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Changes Saved</title>
+</head>
+<body>
+
+  <style>
+    * {
+      font-family: '-apple-system', sans-serif;
+      text-align: center;
+    }
+
+    body {
+      background-color: #e6e6e6;
+    }
+
+    #logo {
+      position: absolute;
+      /*top: 13px;*/
+      top: 25px;
+      margin: 0px;
+    }
+
+    #navbar {
+      background-color: grey;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      left: 0%;
+      padding: 25px;
+      border-radius: 0px 0px 15px 15px;
+    }
+
+    #doc-blocks {
+      display: grid;
+      grid-template-columns: auto auto auto auto auto;
+      padding: 10px;
+    }
+
+    .first-el {
+      margin-top: 100px;
+      text-align: center;
+    }
+
+    hr {
+      width: 10%;
+      height: 3px;
+      background-color: orangered;
+      border: none;
+      border-radius: 30px;
+    }
+
+    a {
+      cursor: pointer;
+      text-decoration: none;
+      color: orangered;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+
+  <h1>The changes you made have now been saved! Anyone can see your new edited version.</h1>
+  <p>Please exit this page to prevent security issues.</p>
+  <hr /><br />
+  <a href="/open/{{ title }}">View Edited Doc</a>
+  <br /><br />
+  <a href="/">Browse other Docs</a>
+</body>
+</html>
