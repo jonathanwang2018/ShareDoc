@@ -15,8 +15,10 @@
     }
 
     textarea {
-      height: 200px;
-      width: 400px;
+      /*height: 200px;
+      width: 400px;*/
+      height: 70vh;
+      width: 50%;
 
       text-align: left;
       padding: 30px;
@@ -63,12 +65,13 @@
   </style>
 
   <form action="/creation/create" method="POST">
-    <input type="text" placeholder="Name of Doc" name="title" maxlength="23" required />
+    <input type="text" placeholder="Name of Doc" name="title" maxlength="255" autocomplete="off" required />
+    <!--23-->
     <br /><hr />
-    <input type="text" placeholder="Author Name" name="author" maxlength="23" required />
+    <input type="text" placeholder="Author Name" name="author" maxlength="23" autocomplete="name" required />
     <br /><hr />
-    <input type="password" placeholder="Password For Editing" name="password" required />
-    <input type="password" placeholder="Confirm Password" name="password2" required />
+    <input type="password" placeholder="Password For Editing" name="password" autocomplete="new-password" required />
+    <input type="password" placeholder="Confirm Password" name="password2" utocomplete="new-password" required />
     <br /><hr />
     <label>View Options</label>
     <br />

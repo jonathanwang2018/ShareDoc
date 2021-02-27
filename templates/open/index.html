@@ -26,6 +26,7 @@
 			text-align: left;
 			margin-top: 5%;
 			padding: 30px;
+			/*padding-top: 10px;*/
 			border-radius: 15px;
 			background-color: whitesmoke;
 			height: 70vh;
@@ -60,7 +61,7 @@
 			color: orangered;
 		}
 
-		hr {
+		.si {
 			width: 10%;
 			height: 3px;
 			background-color: orangered;
@@ -77,29 +78,62 @@
 			outline: none;
 			padding: 5px;
 		}
+
+    .render-headings {
+      text-align: left;
+    }
+
+    .render-hr {
+      border: none;
+      height: 3px;
+      width: 99%;
+      border: none;
+      background-color: grey;
+    }
+
+    .code{
+      color: orangered;
+      background-color: #D3D3D3;
+      border-radius: 4px;
+      padding: 2px;
+      /*margin: 0px 0px 5px 0px;*/
+    }
+
 	</style>
 
-	<h1>Viewing: {{ title }}</h1>
-	<hr />
-	<p class="hidden" id="viewlink">https://ShareDoc.jonathan2018.repl.co/open/{{ title }}</p>
-	<span id="copylink" onclick="Copy(viewlink)">Copy Viewing Link</span>
-  <p>People can view this document with the link, but only the owner can edit it</p>
-  <hr /><br />
-  <span id="enter-pwd-btn">Enter Password to Edit</span>
-  <form action="/postpwd/{{ title }}" method="POST">
-    <input id="enter-pwd" type="password" name="enter-pwd" placeholder="Enter Password to Edit" />
-    <hr /><br />
-    <a href="/">Exit Doc Viewing</a>
-  </form>
+	<h1 id="title">Viewing: {{ title }}</h1>
+	<hr class="si" />
+  <aside>
+    <p class="hidden" id="viewlink">https://ShareDoc.jonathan2018.repl.co/open/{{ utitle }}</p>
+    <span id="copylink" onclick="Copy(viewlink)">Copy Viewing Link</span>
+    <p>People can view this document with the link, but only the owner can edit it</p>
+    <hr class="si" /><br />
+    <span id="enter-pwd-btn">Enter Password to Edit</span>
+    <form action="/postpwd/{{ title }}" method="POST">
+      <input id="enter-pwd" type="password" name="enter-pwd" placeholder="Enter Password to Edit" />
+      <hr class="si" /><br />
+      <a href="/">Exit Doc Viewing</a>
+    </form>
+  </aside>
 
-  <div id="document"></div>
+
+  <main>
+    <article id="document"></article>
+  </main>
+
+
 
   <script>
 
     var content = "{{ content }}";
     
-    document.getElementById("document").innerHTML = content.replace(/∇/g, "<br />");
     
+    document.getElementById("document").innerHTML = content.replace(/∇/g, "<br />");
+
+
+
+   
+
     function Copy(element) {
       var $temp = $("<input>");
       $("body").append($temp);
@@ -110,6 +144,5 @@
     }
 
   </script>
-  
 </body>
 </html>

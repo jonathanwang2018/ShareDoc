@@ -11,7 +11,7 @@
   <style>
     * {
       font-family: '-apple-system', sans-serif;
-      text-align:center;
+      text-align: center;
       justify-content: center;
       align-items: center;
     }
@@ -71,17 +71,27 @@
       outline: none;
       border-radius: 2px;
       width: 20%;
+      margin: 10px;
+    }
+
+    #left {
+      text-align: left;
+      margin: 0px;
+    }
+
+    ul {
+      list-style-type: none;
     }
   </style>
 
   <h1>Editing: {{ title }}</h1>
   <hr />
-  <p class="hidden" id="editlink">https://ShareDoc.jonathan2018.repl.co/open/{{ title }}/{{ pwd }}</p>
+  <p class="hidden" id="editlink">https://ShareDoc.jonathan2018.repl.co/open/{{ utitle }}/{{ pwd }}</p>
   <span id="copylink" onclick="Copy(editlink)">Copy Edit Link</span>
   <p>(Anyone who has the edit link will be able to modify or delete this document)</p>
   <hr />
   <span>The last time you edit this doc was on</span>
-  <p>{{ lastedate }}</p>
+  <p>{{ lastedate }} GMT</p>
   <hr />
   <a href="/">Exit Doc Editing (Changes will be lost)</a>
   <hr /><br />
@@ -91,16 +101,36 @@
     <input type="submit" value="Save Edits" />
     <a href="/open/{{ title }}">Discard Changes</a>
     <br />
+    <div id="left">
+      <p><b>MarkDown Coming Soon</b></p>
+      <hr />
+      
+    </div>
+    <span id="display-word-count"></span>
+    <br />
     <textarea id="document" name="edited" style="resize:none"></textarea><br />
     <input type="submit" value="Save Edits" />
     <a href="/open/{{ title }}">Discard Changes</a>
 
   </form>
   <hr /><br />
-  <form action="/delete-doc/{{ title }}" method="POST">
+  <h1>Doc Settings</h1>
+  <hr /><br />
+  <form action="/changePass/{{ title }}" method="POST">
     <h2 id="red-zone">CAUTION Zone</h2>
+    <p>Change your password. After your password change be sure to remember you modified it!</p>
+    <input type="password" name="oldpass" placeholder="Current Password" />
+    <br />
+    <input type="password" name="newpass" placeholder="New Password" required />
+    <input type="password" name="newpassc" placeholder="Confirm New Password" required />
+    <br />
+    <input type="submit" value="CHANGE PASSWORD" />
+  </form>
+  <hr /><br />
+  <form action="/delete-doc/{{ title }}" method="POST">
+    <h2 id="red-zone">DANGER Zone</h2>
     <p>Deleting a Doc is irreversible. Make sure this is what you really want to do before restarting an essay or deleting your list of passwords that you worked so hard and long on.</p>
-    <input type="text" name="delete-doc" placeholder="Type your PASSWORD to DELETE!" />
+    <input type="password" name="delete-doc" placeholder="Type your PASSWORD to DELETE!" />
     <input type="submit" value="DELETE DOC" />
   </form>
   <br /><hr /><br />
@@ -119,6 +149,20 @@
       $temp.remove();
       document.getElementById("copylink").innerHTML = "Edit Link Copied";
     }
+
+    
+      
+      var document = document.getElementById('document').textContent;
+
+      var textarea = document.getElementById('document');
+
+      console.log("Updating word count");
+      textarea.addEventListener('keyup', function(e){
+        console.log("Updating word count");
+        //count = document.split(' ').length;   
+        $("#display-word-count").innerHTML = "Not working currently";
+      });
+
   </script>
   
   

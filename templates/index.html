@@ -51,7 +51,9 @@
       border-radius: 9px;
       height: 100px;
       width: 150px;
-      overflow: auto;
+      /*overflow: auto;*/
+      text-overflow: ellipsis;
+      overflow: hidden;
       padding: 25px;
       padding-right: 32px;
       margin: auto auto 20px auto;
@@ -107,11 +109,11 @@
   <div id="navbar">
     <h2 id="logo" onclick="window.location.href='/'" class="clickable">ShareDoc</h2>
     <form action="find" method="GET">
-      <input id="search-box" type="text" placeholder="Search ShareDoc Titles" name="term" required/>
+      <input id="search-box" type="text" placeholder="Search ShareDoc Titles" name="term" autocomplete="on" required/>
     </form>
   </div>
 
-  <h1 class="first-el">Browse The Docs Written By Great Minds Like You</h1><hr /><br />
+  <h1 class="first-el">Browse The Docs Written By The Community of Repl.it</h1><hr /><br />
   <a href="/creation" class="button">Create new doc</a>
   <p>{{ search_results }}{{ squote }}<b>{{ search_term }}</b>{{ squote }}</p>
 
@@ -136,7 +138,6 @@
       removeSpace = docs[i];
       removeSpace = removeSpace.toString();
       removeSpace = removeSpace.substring(1);
-      
       docs[i] = removeSpace;
     }
   
