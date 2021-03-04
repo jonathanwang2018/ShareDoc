@@ -1,4 +1,3 @@
-# Not Finished... Yet
 # ShareDoc
 Made with Flask and SQLite3, ShareDoc is a website taht allows users to create documents that can be set to private or set to public where anyone can view them.
 
