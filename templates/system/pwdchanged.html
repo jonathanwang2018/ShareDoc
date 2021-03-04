@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
 </head>
+
 <body>
 
-  <style>
+	<style>
+		* {
+			font-family: '-apple-system', sans-serif;
+			text-align: center;
+		}
 
-    * {
-      font-family: '-apple-system', sans-serif;
-      text-align: center;
-    }
+		a {
+			cursor: pointer;
+			text-decoration: none;
+			color: orangered;
+		}
 
-    a {
-      cursor: pointer;
-      text-decoration: none;
-      color: orangered;
-    }
+		a:hover {
+			text-decoration: underline;
+		}
+	</style>
 
-    a:hover {
-      text-decoration: underline;
-    }
 
-  </style>
+	<h1>The password of '<i><u>{{ title }}</u></i>' has been changed.</h1>
+    <p>Your password has been changed successfully! Make sure you close out of this tab for security reasons. <b>Remember your new password.</b></p>
+    <a href="/">Go Home to Browse</a>
 
-  <h1>The password of '<i><u>{{ title }}</u></i>' has been changed.</h1>
-  <p>Your password has been changed successfully! Make sure you close out of this tab for security reasons. <b>Remember your new password.</b></p>
-  <a href="/">Go Home to Browse</a>
   
 </body>
 </html>

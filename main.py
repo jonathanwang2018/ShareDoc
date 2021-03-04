@@ -3,6 +3,7 @@ import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 import os
+import re
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SecretKey")
@@ -48,18 +49,22 @@ def index():
 	                       total=total,
 	                       docs_list=docs_list,
 	                       preview=preview)
+	                       
+@app.route("/mobile") 
+def mobile():
+  return render_template("mobile.html")
 
 
 @app.route("/find", methods=['GET'])
 def search():
-	if request.args.get('term').find("\'") != -1 or request.args.get(
-	    'term').find("%") != -1:
+	term = request.args.get('term')
+	if term.find("\'") != -1 or term.find("%") != -1:
 		error = "Error! Search Term cannot contain single quotes or the percent sign."
 		return render_template("system/error-report.html", error=error)
 	conn = sqlite3.connect('docs.sql')
 	c = conn.cursor()
 	results = c.execute(
-	    f"SELECT title FROM docsInfo WHERE title LIKE '%{request.args.get('term')}%' AND mode='public'"
+	    f"SELECT title FROM docsInfo WHERE title LIKE '%{term}%' AND mode='public'"
 	).fetchall()
 	conn.commit()
 	conn.close()
@@ -71,14 +76,14 @@ def search():
 
 	search_results = f"Showing {total} search {propernumgrammar} for "
 
-	search_term = f"{request.args.get('term')}"
+	search_term = f"{term}"
 
 	results = list(results)
 	conn = sqlite3.connect('docs.sql')
 	c = conn.cursor()
 	authors = list(
 	    c.execute(
-	        f"SELECT author FROM docsInfo WHERE title LIKE '%{request.args.get('term')}%' AND mode='public'"
+	        f"SELECT author FROM docsInfo WHERE title LIKE '%{term}%' AND mode='public'"
 	    ).fetchall())
 	conn.commit()
 	conn.close()
@@ -86,10 +91,10 @@ def search():
 	conn = sqlite3.connect('docs.sql')
 	c = conn.cursor()
 	results = c.execute(
-	    f"SELECT title FROM docsInfo WHERE title LIKE '%{request.args.get('term')}%' AND mode='public'"
+	    f"SELECT title FROM docsInfo WHERE title LIKE '%{term}%' AND mode='public'"
 	).fetchall()
 	authors = c.execute(
-	    f"SELECT author FROM docsInfo WHERE title LIKE '%{request.args.get('term')}%' AND mode='public'"
+	    f"SELECT author FROM docsInfo WHERE title LIKE '%{term}%' AND mode='public'"
 	).fetchall()
 	total = len(results)
 	docs_list = []
@@ -115,6 +120,75 @@ def search():
 	                       total=total,
 	                       docs_list=docs_list)
 
+@app.route("/author", methods=["GET"])
+def searchAuthor():
+	searchAuthor = request.args.get('author')
+	if searchAuthor.find("\'") != -1 or searchAuthor.find("%") != -1:
+		error = "Error! Search term cannot contain single quotes or percent signs."
+		return render_template("system/error-report.html", error=error)
+	else:
+		pass
+	conn = sqlite3.connect('docs.sql')
+	c = conn.cursor()
+	results = c.execute(
+	    f"SELECT title FROM docsInfo WHERE author LIKE '%{searchAuthor}%' AND mode='public'"
+	).fetchall()
+	conn.commit()
+	conn.close()
+	total = len(results)
+	if total == 1:
+		propernumgrammar = "result"
+	else:
+		propernumgrammar = "results"
+
+	search_results = f"Showing {total} {propernumgrammar} written by authors related to "
+
+	search_term = f"{searchAuthor}"
+
+	results = list(results)
+	conn = sqlite3.connect('docs.sql')
+	c = conn.cursor()
+	authors = list(
+	    c.execute(
+	        f"SELECT author FROM docsInfo WHERE author LIKE '%{searchAuthor}%' AND mode='public'"
+	    ).fetchall())
+	conn.commit()
+	conn.close()
+
+	conn = sqlite3.connect('docs.sql')
+	c = conn.cursor()
+	results = c.execute(
+	    f"SELECT title FROM docsInfo WHERE author LIKE '%{searchAuthor}%' AND mode='public'"
+	).fetchall()
+	authors = c.execute(
+	    f"SELECT author FROM docsInfo WHERE author LIKE '%{searchAuthor}%' AND mode='public'"
+	).fetchall()
+	total = len(results)
+	docs_list = []
+	for i in range(total):
+		results_item = str(results[i])
+		authors_item = str(authors[i])
+		results_item = results_item[2:]
+		results_item = results_item[:-3]
+
+		authors_item = authors_item[2:]
+		authors_item = authors_item[:-3]
+		docs_list.append(results_item)
+		docs_list.append(authors_item)
+
+	conn.commit()
+	conn.close()
+	docs_list.reverse()
+
+	searchAuthor = f"@{searchAuthor}"
+
+	return render_template("index.html",
+	                       search_results=search_results,
+												 search_term=search_term,
+												 squote = "\'",
+	                       total=total,
+	                       docs_list=docs_list,
+												 searchAuthor=searchAuthor)
 
 @app.route("/creation")
 def creation():
@@ -123,6 +197,13 @@ def creation():
 
 @app.route("/creation/create", methods=['POST'])
 def createDoc():
+
+	tagatag = re.search("##", request.form.get("doc-content"))
+	atanat = re.search("@@", request.form.get("doc-content"))
+
+	if tagatag or atanat:
+		error = "You cannot tag a tag or ping a ping inside your document."
+		return render_template("system/error-report.html", error=error)
 
 	password1 = request.form.get("password")
 	password2 = request.form.get("password2")
@@ -191,13 +272,13 @@ def viewDoc(title):
 	    "title": title
 	}).fetchall()
 	if len(doc) == 0:
-		error = "404 - That document does not exist!"
-		return render_template("system/error-report.html", error=error)
+		error = "document"
+		return render_template("system/404.html", item=error)
 	conn.commit()
 	conn.close()
 
 	doc = str(doc)
-	doc = doc.replace(r"\r\n", "∇")
+	doc = doc.replace(r"\r\n", " ∇")
 	doc = doc[3:]
 	doc = doc[:-4]
 	utitle = title.replace(" ", "%20")
@@ -254,6 +335,13 @@ def editDoc(title, pwd):
 
 @app.route("/submit-edit/<title>/<pwd>", methods=['POST'])
 def saveEdits(title, pwd):
+	tagatag = re.search("##", request.form.get("edited"))
+	atanat = re.search("@@", request.form.get("edited"))
+
+	if tagatag or atanat:
+		error = "You cannot tag a tag or ping a ping inside your document."
+		return render_template("system/error-report.html", error=error)
+
 	edited = request.form.get("edited")
 	conn = sqlite3.connect('docs.sql')
 	edate = datetime.datetime.now()
@@ -397,6 +485,11 @@ def change(title):
 	else:
 		error = "Cannot change to new password because current password is incorrect."
 		return render_template("system/error-report.html", error=error)
+
+@app.errorhandler(404)
+def page_not_found(e):
+  error = "page"
+  return render_template('system/404.html', item=error), 404
 
 
 app.run(host='0.0.0.0', port=8080, debug=True)

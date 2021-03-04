@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>404 | That Doesn't Exist !!!</title>
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+</head>
+
+<body>
+
+	<style>
+		* {
+			font-family: '-apple-system', sans-serif;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+		}
+
+		svg {
+			/*margin: 10% auto auto auto;*/
+			margin: 5% auto auto auto;
+		}
+
+		#error-svg path {
+			stroke-dasharray: 1473px;
+			stroke-dashoffset: 1473px;
+			animation: outline 7s ease forwards 0.5s;
+		}
+
+		#error-svg {
+			animation: fill 0.5s ease forwards 2s,
+			3s bounce infinite 2.5s;
+		}
+
+		@keyframes outline {
+			to {
+				stroke-dashoffset: 0;
+			}
+		}
+
+		@keyframes fill {
+			from {
+				fill: transparent;
+			}
+			to {
+				fill: #FFA73F;
+			}
+		}
+
+		@keyframes bounce {
+			50% {
+				transform: translateY(15px);
+			}
+		}
+
+		hr {
+			width: 10%;
+			height: 3px;
+			background-color: orangered;
+			border: none;
+			border-radius: 30px;
+			display: block;
+		}
+
+		a {
+			cursor: pointer;
+			text-decoration: none;
+			color: orangered;
+		}
+
+		a:hover {
+			text-decoration: underline;
+		}
+
+		#item {
+			text-decoration: underline overline;
+		}
+		
+		.satellite {
+			font-size: 50px;
+		}
+	</style>
+	
+	<h1><i class="fad fa-satellite satellite"></i></h1>
+
+	<svg id="error-svg" width="273" height="116" viewBox="0 0 273 116" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path d="M3.26001 87.816V90.316H5.76001H56.54V111V113.5H59.04H72H74.5V111V90.316H86.4H88.9V87.816V76.44V73.94H86.4H74.5V7.89598V5.39598H72H56.304H55.0257L54.2773 6.43226L3.73331 76.4163L3.26001 77.0716V77.88V87.816ZM154.774 37.1397L154.778 37.163L154.783 37.1863C155.892 42.7331 156.463 49.6138 156.463 57.864C156.463 66.4071 155.892 73.4816 154.782 79.1254L154.778 79.1449L154.774 79.1643C153.789 84.6301 151.719 88.848 148.675 91.9766L148.662 91.9892L148.65 92.002C145.899 94.9109 141.75 96.548 135.779 96.548C129.711 96.548 125.456 94.9101 122.606 91.9891C119.646 88.8543 117.572 84.6228 116.491 79.1448C115.473 73.4877 114.951 66.4056 114.951 57.864C114.951 49.6131 115.473 42.7235 116.491 37.163C117.571 31.6832 119.646 27.4506 122.606 24.315C125.456 21.3939 129.711 19.756 135.779 19.756C141.75 19.756 145.899 21.3931 148.65 24.302L148.662 24.3148L148.675 24.3274C151.719 27.456 153.789 31.6739 154.774 37.1397ZM184.244 87.816V90.316H186.744H237.524V111V113.5H240.024H252.984H255.484V111V90.316H267.384H269.884V87.816V76.44V73.94H267.384H255.484V7.89598V5.39598H252.984H237.288H236.01L235.262 6.43226L184.718 76.4163L184.244 77.0716V77.88V87.816ZM25.7054 73.94L57.116 29.4514V73.94H25.7054ZM105.392 18.0173C99.705 27.7696 96.9905 41.134 96.9905 57.864C96.9905 74.878 99.7038 88.4337 105.389 98.2819C111.328 108.569 121.705 113.5 135.779 113.5C149.764 113.5 160.088 108.563 166.024 98.2819C171.709 88.4337 174.423 74.878 174.423 57.864C174.423 41.1325 171.708 27.7672 166.019 18.0146C160.083 7.73864 149.761 2.80399 135.779 2.80399C121.708 2.80399 111.332 7.73345 105.392 18.0173ZM238.1 73.94H206.69L238.1 29.4514V73.94Z"
+		 stroke="#FFA73F" stroke-width="5" />
+	</svg>
+	<br />
+    <br />
+    <hr />
+
+    <h1><i class="fad fa-bomb"></i> Uh Oh!</h1>
+    <h1>It looks like we can't get a hold of the <span id="item">{{ item }}</span> that you are looking for.</h1>
+    <p><b>It may come back in the future.</b></p>
+    <a href="/"><i class="fad fa-home-alt"></i> Go To Our Homepage!</a>
+
+
+  <script>
+    var seconds_spent = 0;
+    var status;
+    var usage;
+    window.setInterval(function () {
+      seconds_spent++;
+      if (seconds_spent > 300) {
+        status = "\nYou should really consider leaving soon. Bye!";
+      } else {
+        status = "";
+      }
+      if (seconds_spent == 1){
+        usage = " second.";
+      } else {
+        usage = " seconds.";
+      }
+      console.log("You've been mesmerized by this error page for " + seconds_spent + usage + status);
+    }, 1000);
+    
+  </script>
+
+</body>
+
+</html>

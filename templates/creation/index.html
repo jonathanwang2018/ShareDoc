@@ -1,91 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create A New Doc | ShareDoc</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Create A New Doc | ShareDoc</title>
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
+
 <body>
 
-  <style>
-    * {
-      font-family: '-apple-system', sans-serif;
-      text-align: center;
+	<style>
+		* {
+			font-family: '-apple-system', sans-serif;
+			text-align: center;
 
-    }
+		}
 
-    textarea {
-      /*height: 200px;
+		textarea {
+			/*height: 200px;
       width: 400px;*/
-      height: 70vh;
-      width: 50%;
+			height: 70vh;
+			width: 50%;
 
-      text-align: left;
-      padding: 30px;
-      border-radius: 15px;
-      background-color: whitesmoke;
-      margin-left: auto;
-      margin-right: auto;
-      overflow: auto;
-      font-size: 18px;
-      border: none;
-      outline: none;
-      resize: none;
-    }
+			text-align: left;
+			padding: 30px;
+			border-radius: 15px;
+			background-color: whitesmoke;
+			margin-left: auto;
+			margin-right: auto;
+			overflow: auto;
+			font-size: 18px;
+			border: none;
+			outline: none;
+			resize: none;
+		}
 
-    select {
-      outline: none;
-    }
+		select {
+			outline: none;
+		}
 
-    a {
-      cursor: pointer;
-      text-decoration: none;
-      color: orangered;
-    }
+		a {
+			cursor: pointer;
+			text-decoration: none;
+			color: orangered;
+		}
 
-    a:hover {
-      text-decoration: underline;
-    }
+		a:hover {
+			text-decoration: underline;
+		}
 
-    hr {
-      width: 10%;
-      height: 3px;
-      background-color: orangered;
-      border: none;
-      border-radius: 30px;
-    }
+		hr {
+			width: 10%;
+			height: 3px;
+			background-color: orangered;
+			border: none;
+			border-radius: 30px;
+		}
 
-    input {
-      background-color: whitesmoke;
-      border: none;
-      padding: 7px;
-      outline: none;
-      border-radius: 2px;
-    }
-  </style>
+		input {
+			background-color: whitesmoke;
+			border: none;
+			padding: 7px;
+			outline: none;
+			border-radius: 2px;
+		}
 
-  <form action="/creation/create" method="POST">
-    <input type="text" placeholder="Name of Doc" name="title" maxlength="255" autocomplete="off" required />
-    <!--23-->
-    <br /><hr />
-    <input type="text" placeholder="Author Name" name="author" maxlength="23" autocomplete="name" required />
-    <br /><hr />
-    <input type="password" placeholder="Password For Editing" name="password" autocomplete="new-password" required />
-    <input type="password" placeholder="Confirm Password" name="password2" utocomplete="new-password" required />
-    <br /><hr />
-    <label>View Options</label>
+		.red {
+			color: red;
+		}
+
+		.orange {
+			color: orange;
+		}
+	</style>
+
+	<h1><i class="fad fa-plus-circle orange"></i> Create A New Doc</h1>
+
+	<form action="/creation/create" method="POST">
+		<input type="text" placeholder="Name of Doc" name="title" maxlength="255" autocomplete="off" required />
+      <!--23-->
+      <br /><hr />
+      <input type="text" placeholder="Author Name" name="author" maxlength="23" autocomplete="name" required />
+      <br /><hr />
+      <input type="password" placeholder="Password For Editing" name="password" autocomplete="new-password" required />
+      <input type="password" placeholder="Confirm Password" name="password2" utocomplete="new-password" required />
+      <br /><hr />
+      <label>View Options</label>
+      <br />
+      <select name="view" required>
+        <option value="disabled" disabled>Choose View Mode</option>
+        <option value="public">Public Doc (Anybody can View)</option>
+        <option value="private">Private Doc (Only people with the link can view)</option>
+      </select>
+      <br /><hr />
+			<i class="fad fa-upload orange"></i>
+      <input type="submit" value="Publish Doc" />
+      <a href="/">Cancel</a>
+      <br /><hr />
+      <textarea placeholder="Start Writing!" name="doc-content"></textarea>
+      <hr />
+			<i class="fad fa-upload orange"></i>
+     <input type="submit" value="Publish Doc" />
+      <a href="/">Cancel</a>
+    </form>
     <br />
-    <select name="view" required>
-      <option disabled>Choose View Mode</option>
-      <option value="public">Public Doc (Anybody can View)</option>
-      <option value="private">Private Doc (Only people with the link can view)</option>
-    </select>
-    <br /><hr />
-    <textarea placeholder="Start Writing!" name="doc-content"></textarea>
-    <hr />
-    <input type="submit" value="Create Doc" />
-    <a href="/">Cancel</a>
-  </form>
+
   
 </body>
 </html>

@@ -1,126 +1,168 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Browse Public Docs | ShareDoc</title>
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Browse Public Docs | ShareDoc</title>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+	 crossorigin="anonymous">
+	</script>
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
+
 <body>
 
-  <style>
-    * {
-      font-family: '-apple-system', sans-serif;
-    }
+	<style>
+		* {
+			font-family: '-apple-system', sans-serif;
+		}
 
-    @font-face {
-      font-family: 'operatorBI';
-      src: url("https://FontsR.jonathan2018.repl.co/OperatorMono-BoldItalic.woff") format("woff"), url('https://FontsR.jonathan2018.repl.co/OperatorMono-BoldItalic.ttf')  format('truetype')
-    }
+		@font-face {
+			font-family: 'operatorBI';
+			src: url("https://FontsR.jonathan2018.repl.co/OperatorMono-BoldItalic.woff") format("woff"), url('https://FontsR.jonathan2018.repl.co/OperatorMono-BoldItalic.ttf') format('truetype')
+		}
 
-    body {
-      background-color: #e6e6e6;
-    }
+		body {
+			background-color: #e6e6e6;
+		}
 
-    #logo {
-      position: absolute;
-      /*top: 13px;*/
-      top: 25px;
-      margin: 0px;
-    }
+		#logo {
+			position: absolute;
+			/*top: 13px;*/
+			top: 25px;
+			margin: 0px;
+		}
 
-    #navbar {
-      background-color: grey;
-      position: fixed;
-      top: 0;
-      width: 100%;
-      left: 0%;
-      padding: 25px;
-      border-radius: 0px 0px 15px 15px;
-    }
+		#navbar {
+			background-color: grey;
+			position: fixed;
+			top: 0;
+			width: 100%;
+			left: 0%;
+			padding: 25px;
+			border-radius: 0px 0px 15px 15px;
+		}
 
-    #doc-blocks {
-      display: grid;
-      grid-template-columns: auto auto auto auto auto;
-      padding: 10px;
-    }
-    .doc-block {
-      background-color: rgba(255, 255, 255, 0.8);
-      font-size: 30px;
-      text-align: center;
-      border-radius: 9px;
-      height: 100px;
-      width: 150px;
-      /*overflow: auto;*/
-      text-overflow: ellipsis;
-      overflow: hidden;
-      padding: 25px;
-      padding-right: 32px;
-      margin: auto auto 20px auto;
-      cursor: pointer;
-      align-items: center;
-    }
+		#doc-blocks {
+			display: grid;
+			grid-template-columns: auto auto auto auto auto;
+			padding: 10px;
+		}
 
-    .doc-block-in {
-      font-size: 15px;
-      font-family: 'operatorBI', sans-serif;
-    }
+		.doc-block {
+			background-color: rgba(255, 255, 255, 0.8);
+			font-size: 30px;
+			text-align: center;
+			border-radius: 9px;
+			height: 100px;
+			width: 150px;
+			/*overflow: auto;*/
+			text-overflow: ellipsis;
+			overflow: hidden;
+			padding: 25px;
+			padding-right: 32px;
+			margin: auto auto 20px auto;
+			cursor: pointer;
+			align-items: center;
+			white-space: nowrap;
+		}
 
-    .first-el {
-      margin-top: 100px;
-      text-align: center;
-    }
+		.doc-block-in {
+			font-size: 15px;
+			font-family: 'operatorBI', sans-serif;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: nowrap;
+		}
 
-    #search-box {
-      float: right;
-      margin: 0px 50px 0px 0px;
-      background-color: whitesmoke;
-      border-radius: 5px;
-      height: 25px;
-      border: none;
-      border-bottom: 2px solid #ffd800;
-      outline: none;
-      padding: 5px;
-    }
+		.first-el {
+			margin-top: 100px;
+			text-align: center;
+		}
 
-    hr {
-      width: 10%;
-      height: 3px;
-      background-color: orangered;
-      border: none;
-      border-radius: 30px;
-    }
+		#search-box {
+			float: right;
+			margin: 0px 50px 0px 0px;
+			background-color: whitesmoke;
+			border-radius: 5px;
+			height: 25px;
+			border: none;
+			border-bottom: 2px solid #ffd800;
+			outline: none;
+			padding: 5px;
+		}
 
-    a {
-      cursor: pointer;
-      text-decoration: none;
-      color: orangered;
-    }
+		hr {
+			width: 10%;
+			height: 3px;
+			background-color: orangered;
+			border: none;
+			border-radius: 30px;
+		}
 
-    a:hover {
-      text-decoration: underline;
-    }
+		a {
+			cursor: pointer;
+			text-decoration: none;
+			color: orangered;
+		}
 
-    .clickable {
-      cursor: pointer;
-    }
-  </style>
+		a:hover {
+			text-decoration: underline;
+		}
 
-  <div id="navbar">
-    <h2 id="logo" onclick="window.location.href='/'" class="clickable">ShareDoc</h2>
-    <form action="find" method="GET">
-      <input id="search-box" type="text" placeholder="Search ShareDoc Titles" name="term" autocomplete="on" required/>
-    </form>
-  </div>
+		.clickable {
+			cursor: pointer;
+		}
 
-  <h1 class="first-el">Browse The Docs Written By The Community of Repl.it</h1><hr /><br />
-  <a href="/creation" class="button">Create new doc</a>
-  <p>{{ search_results }}{{ squote }}<b>{{ search_term }}</b>{{ squote }}</p>
+		/*#search-bar-icon {
+			position: absolute;
+			left: 83%;
+			top: 49.5%;
+			transform: translate(-50%, -50%);
+		}*/
+
+		#search-bar-icon {
+			color: red;
+		}
+
+		#move-to-back {
+			z-index: -1;
+		}
+
+	</style>
 
 
-  <div id="doc-blocks"></div>
+	<div id="navbar">
+		<h2 id="logo" onclick="window.location.href='/'" class="clickable">ShareDoc</h2>
+		<form action="find" method="GET">
+			<input id="search-box" type="text" placeholder="Search ShareDoc Titles" name="term" autocomplete="on" value="{{ searchAuthor }}" required />
+      </form>
+    </div>
+
+    <h1 class="first-el">Browse The Docs Written By The Community of Repl.it</h1><hr /><br />
+    <a href="/creation" class="button"><i id="move-to-back" class="fad fa-plus-circle"></i> Create new doc</a>
+    <p>{{ search_results }}{{ squote }}<b>{{ search_term }}</b>{{ squote }}</p>
+
+
+    <div id="doc-blocks"></div>
+
 
   <script>
+    console.log("This site runs on JavaScript, and it looks like you have it enabled.\n\nMake sure that you DO NOT DISABLE JS, AS SHAREDOC WILL NOT FUNCTION PROPERLY!");
+    if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)) || window.innerWidth < 1080){
+        location.replace("/mobile");
+    }
+    window.setInterval(function () {
+      console.log("Screen size is " + window.innerWidth + "x" + window.innerHeight + ".\n-------------\nReport: Screen Size Qualifies.");
+      if ((navigator.userAgent.match(/iPhone/i)) || (navigator.userAgent.match(/iPod/i)) || window.innerWidth < 1080){
+        location.replace("/mobile");
+      }
+    }, 500);
+
+      //1115, 1099
+
+    
     var change = "{{ docs_list }}";
     change = change.replace(/&#39;/g, "");
     var docs = change.split(",");
@@ -130,9 +172,9 @@
 
     docs[0] = firstlel;
 
-    var lastlel = docs[{{ total * 2}} - 1].toString();
+    var lastlel = docs[{{ total }} * 2 - 1].toString();
     lastlel = lastlel.replace(/\]/g, "");
-    docs[{{ total * 2}} - 1] = lastlel;
+    docs[{{ total }} * 2 - 1] = lastlel;
 
     for (var i = 0; i < docs.length; i++) {
       removeSpace = docs[i];
@@ -143,7 +185,7 @@
   
     for (var i = 0; i < docs.length; i+=2) {
       
-      $("#doc-blocks").append("<div class='doc-block' onclick=\"window.location.href='/open/" + docs[i+1] + "'\">" + docs[i+1] + "<div class=\"doc-block-in\">" + docs[i] + "</div></div>");
+      $("#doc-blocks").append(`<div class="doc-block" title="𝐓𝐢𝐭𝐥𝐞:  ${docs[i+1]} \n𝐁𝐲: ${docs[i]} "onclick="window.location.href='/open/${docs[i+1]}'">${docs[i+1]}<div class="doc-block-in">${docs[i]}</div></div>`);
     }
 
   </script>
